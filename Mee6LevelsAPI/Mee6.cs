@@ -7,12 +7,13 @@ using System.Drawing;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace Mee6LevelsAPI
 {
     public static class Mee6
     {
-        static string Url = "https://mee6.xyz/api/plugins/levels/leaderboard/";
+        const string Url = "https://mee6.xyz/api/plugins/levels/leaderboard/";
         public static int Limit = 1000;
         public static Mee6UserInfo GetUserInfo(long guildID, long userID)
         {
@@ -40,7 +41,30 @@ namespace Mee6LevelsAPI
             return server;
         }
 
+        public static Mee6Server GetServer(long guildID, string fileName)
+        {
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.GetAsync(Url + $"{guildID}?limit={Limit}").Result;
+            response.EnsureSuccessStatusCode();
+            string responseBody = response.Content.ReadAsStringAsync().Result;
 
+            Mee6Server server = JsonConvert.DeserializeObject<Mee6Server>(responseBody);
+            string json = JsonConvert.SerializeObject(server, Formatting.Indented);
+            File.WriteAllText(fileName, json);
+            return server;
+        }
+
+        public static Image GetAvatar(Mee6UserInfo user, int size)
+        {
+            string imageUrl = $"https://cdn.discordapp.com/avatars/{user.id}/{user.avatar}?size={size}";
+            using (System.Net.WebClient webClient = new System.Net.WebClient())
+            {
+                using (Stream stream = webClient.OpenRead(imageUrl))
+                {
+                    return Image.FromStream(stream);
+                }
+            }
+        }
     }
 
     public struct Mee6UserInfo
