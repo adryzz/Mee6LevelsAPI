@@ -13,10 +13,10 @@ if you need to retrieve multiple users' info:
 ```C#
 Mee6UserInfo[] info = Mee6.GetServer(1000).players;//this is guild ID
 ```
-By default, this library will search up to 1000 users. if you want to load more than 1000 users, do this.
+By default, this library will search up to 1000 users. if you want to load less than 1000 users, do this. the public API can access up to 1000 members, so there's that.
 
 ```C#
-Mee6.Limit = 10000;//It will load now 10000 members
+Mee6.Limit = 500;//It will load now 500 members
 ```
 
 The library is pretty straightforward to use, and has a JSON-like structure.
