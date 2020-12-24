@@ -41,6 +41,17 @@ namespace Mee6LevelsAPI
             return server;
         }
 
+        public static async Task<Mee6Server> GetServerAsync(long guildID)
+        {
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(Url + $"{guildID}?limit={Limit}");
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            Mee6Server server = JsonConvert.DeserializeObject<Mee6Server>(responseBody);
+            return server;
+        }
+
         public static Mee6Server GetServer(long guildID, string fileName)
         {
             HttpClient client = new HttpClient();
