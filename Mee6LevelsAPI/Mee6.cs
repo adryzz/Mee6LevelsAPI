@@ -21,8 +21,8 @@ namespace Mee6LevelsAPI
 
             for(int i = 0; i < Limit; i++)
             {
-                Mee6UserInfo user = server.players[i];
-                if (user.id.Equals(userID.ToString()))
+                Mee6UserInfo user = server.Users[i];
+                if (user.Id.Equals(userID.ToString()))
                 {
                     return user;
                 }
@@ -67,7 +67,7 @@ namespace Mee6LevelsAPI
 
         public static Image GetAvatar(Mee6UserInfo user, int size)
         {
-            string imageUrl = $"https://cdn.discordapp.com/avatars/{user.id}/{user.avatar}?size={size}";
+            string imageUrl = $"https://cdn.discordapp.com/avatars/{user.Id}/{user.Avatar}?size={size}";
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
                 using (Stream stream = webClient.OpenRead(imageUrl))
@@ -80,57 +80,92 @@ namespace Mee6LevelsAPI
 
     public struct Mee6UserInfo
     {
-        public string avatar;
-        public int[] detailed_xp;
-        public string discriminator;
-        public string guild_id;
-        public string id;
-        public long level;
-        public long message_count;
-        public string username;
-        public long xp;
+        [JsonProperty("avatar")]
+        public string Avatar;
+        [JsonProperty("detailed_xp")]
+        public int[] DetailedXp;
+        [JsonProperty("discriminator")]
+        public string Discriminator;
+        [JsonProperty("guild_id")]
+        public string GuildId;
+        [JsonProperty("id")]
+        public string Id;
+        [JsonProperty("level")]
+        public long Level;
+        [JsonProperty("message_count")]
+        public long MessageCount;
+        [JsonProperty("username")]
+        public string Username;
+        [JsonProperty("xp")]
+        public long Xp;
     }
 
     public struct Mee6GuildInfo
     {
-        public bool allow_join;
-        public string icon;
-        public string id;
-        public bool invite_leaderboard;
-        public string leaderboard_url;
-        public string name;
-        public bool premium;
+        [JsonProperty("allow_join")]
+        public bool AllowJoin;
+        [JsonProperty("icon")]
+        public string Icon;
+        [JsonProperty("id")]
+        public string Id;
+        [JsonProperty("invite_leaderboard")]
+        public bool InviteLeaderboard;
+        [JsonProperty("leaderboard_url")]
+        public string LeaderboardURL;
+        [JsonProperty("name")]
+        public string Name;
+        [JsonProperty("premium")]
+        public bool Premium;
     }
 
     public struct Mee6RoleInfo
     {
-        public long rank;
-        public Mee6Role role;
+        [JsonProperty("rank")]
+        public long Rank;
+        [JsonProperty("role")]
+        public Mee6Role Role;
     }
 
     public struct Mee6Role
     {
-        public long color;
-        public bool hoist;
-        public string id;
-        public bool managed;
-        public bool mentionable;
-        public string name;
-        public long permissions;
-        public long position;
+        [JsonProperty("color")]
+        public long Color;
+        [JsonProperty("hoist")]
+        public bool Hoist;
+        [JsonProperty("id")]
+        public string Id;
+        [JsonProperty("managed")]
+        public bool Managed;
+        [JsonProperty("mentionable")]
+        public bool Mentionable;
+        [JsonProperty("name")]
+        public string Name;
+        [JsonProperty("permissions")]
+        public long Permissions;
+        [JsonProperty("position")]
+        public long Position;
     }
 
     public struct Mee6Server
     {
-        public bool admin;
-        public string banner_url;
-        public Mee6GuildInfo guild;
-        public bool is_member;
-        public long page;
-        public Mee6UserInfo[] players;
-        public Mee6RoleInfo[] role_rewards;
+        [JsonProperty("admin")]
+        public bool Admin;
+        [JsonProperty("banner_url")]
+        public string BannerURL;
+        [JsonProperty("guild")]
+        public Mee6GuildInfo Guild;
+        [JsonProperty("is_member")]
+        public bool IsMember;
+        [JsonProperty("page")]
+        public long Page;
+        [JsonProperty("players")]
+        public Mee6UserInfo[] Users;
+        [JsonProperty("role_rewards")]
+        public Mee6RoleInfo[] RewardRoles;
         //user_guild_settings not implemented
-        public long[] xp_per_message;
-        public long xp_rate;
+        [JsonProperty("xp_per_message")]
+        public long[] XPPerMessage;
+        [JsonProperty("xp_rate")]
+        public long XPRate;
     }
 }
