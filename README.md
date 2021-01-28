@@ -6,12 +6,12 @@ Uses [Newtonsoft.Json](https://www.newtonsoft.com/json) as a reference.
 How to retrieve user info:
 ```C#
 Mee6UserInfo info = Mee6.GetUserInfo(105753365916422144, 509442538378100736);//these are guild ID and user ID. change them
-Console.WriteLine($"The user {user.username} is at level {info.level}.");
+Console.WriteLine($"The user {user.Username} is at level {info.Level}.");
 ```
 
 if you need to retrieve multiple users' info:
 ```C#
-Mee6UserInfo[] info = Mee6.GetServer(105753365916422144).players;//this is guild ID
+Mee6UserInfo[] info = Mee6.GetServer(105753365916422144).Users;//this is guild ID
 ```
 By default, this library will search up to 1000 users. if you want to load less than 1000 users, do this. the public API can access up to 1000 members, so there's that.
 
