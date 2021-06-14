@@ -14,6 +14,7 @@ if you need to retrieve multiple users' info:
 Mee6UserInfo[] info = Mee6.GetServer(105753365916422144).Users;//this is guild ID
 ```
 By default, this library will search up to 1000 users. if you want to load less than 1000 users, do this. the public API can access up to 1000 members, so there's that.
+**Edit: they either changed it or something, but i am able to load more than 1000 users on a premium server using the public API.**
 
 ```C#
 Mee6.Limit = 500;//It will load now 500 members
